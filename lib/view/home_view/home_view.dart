@@ -40,10 +40,12 @@ class HomeView extends StatelessWidget {
                                     onTap: () => Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (ctx) => VideoView(
-                                                url: model.videos[i]))),
+                                                url: model.videos[i],
+                                                isLocal: false))),
                                     leading:
                                         CircleAvatar(child: Text("${i + 1}")),
-                                    title: Text(model.videos[i]),
+                                    title:
+                                        Text(model.videos[i].split('/').last),
                                   )),
                         )
                       : model.isBusy
@@ -58,8 +60,8 @@ class HomeView extends StatelessWidget {
                                           onTap: () => Navigator.of(context)
                                               .push(MaterialPageRoute(
                                                   builder: (ctx) => VideoView(
-                                                      url: model
-                                                          .data![i].path))),
+                                                      url: model.data![i].path,
+                                                      isLocal: true))),
                                           leading: CircleAvatar(
                                               child: Text("${i + 1}")),
                                           title: Text(model.data![i].path

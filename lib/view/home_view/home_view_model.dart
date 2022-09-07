@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 
@@ -14,23 +15,21 @@ class HomeViewModel extends FutureViewModel<List<FileSystemEntity>> {
 
   List<String> videos = [
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    "https://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4",
   ];
 
   Future<List<FileSystemEntity>> dirContents() async {
     if (await requestPermission(Permission.storage)) {
-      var dir = Directory('/storage/emulated/0/');
+      var dir = Directory(
+          '/storage/emulated/0/famenet'); //You can change this path to your use case
       var files = <FileSystemEntity>[];
       var completer = Completer<List<FileSystemEntity>>();
-      var lister = dir.list(recursive: false);
+      var lister = dir.list();
       lister.listen((file) => files.add(file),
-          // should also register onError
           onDone: () => completer.complete(files));
       final l = await completer.future;
-      for (var files in l) {
-        print(files.path);
+      for (var entity in l) {
+        print(entity.path.endsWith('.mp4'));
       }
-
       return completer.future;
     }
     return [];

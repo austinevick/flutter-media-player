@@ -5,14 +5,16 @@ import 'package:stacked/stacked.dart';
 
 class VideoView extends StatelessWidget {
   final String url;
-  const VideoView({Key? key, required this.url}) : super(key: key);
+  final bool isLocal;
+  const VideoView({Key? key, required this.url, required this.isLocal})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<VideoViewModel>.reactive(
         viewModelBuilder: () => VideoViewModel(),
         onDispose: (model) => model.dispose(),
-        onModelReady: (model) => model.init(context, url),
+        onModelReady: (model) => model.init(context, url, isLocal),
         builder: (context, model, child) => Scaffold(
               body: Center(
                 child: CustomVideoPlayer(
