@@ -203,7 +203,7 @@ class _VideoPlayerControllersState extends State<VideoPlayerControllers> {
                       currentPosition - const Duration(seconds: 10);
                   widget.videoController.seekTo(targetPosition);
                 },
-                icon: const Icon(Icons.skip_previous)),
+                icon: const Icon(Icons.fast_rewind)),
             IconButton(
                 iconSize: 65,
                 onPressed: () {
@@ -213,7 +213,7 @@ class _VideoPlayerControllersState extends State<VideoPlayerControllers> {
                       currentPosition + const Duration(seconds: 10);
                   widget.videoController.seekTo(targetPosition);
                 },
-                icon: const Icon(Icons.skip_next, size: 65)),
+                icon: const Icon(Icons.fast_forward, size: 65)),
           ],
         ),
         const SizedBox(height: 30)
